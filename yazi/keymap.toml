@@ -1,0 +1,149 @@
+# Zip
+[[mgr.prepend_keymap]]
+on   = [ "z" ]
+run  = "plugin compress"
+desc = "Archive selected files"
+
+# Trash
+[[mgr.prepend_keymap]]
+on = [ "T" ]
+run = "plugin recycle-bin"
+desc = "Open Recycle Bin menu"
+
+# Keymap
+[mgr]
+keymap = [
+	{ on = "<Esc>", run = "escape",             desc = "Exit visual mode, clear selection, or cancel search" },
+	{ on = "q",     run = "quit",               desc = "Quit the process" },
+	{ on = "Q",     run = "quit --no-cwd-file", desc = "Quit without outputting cwd-file" },
+
+	# Hopping
+	{ on = "<Up>",   run = "arrow prev",    desc = "Previous file" },
+	{ on = "<Down>", run = "arrow next",    desc = "Next file" },
+	{ on = "<C-Up>", run = "arrow -30%",    desc = "Move cursor up half page" },
+	{ on = "<C-Down>", run = "arrow 30%",   desc = "Move cursor down half page" },
+
+	# Navigation
+	{ on = "<Left>",  run = "leave", desc = "Back to the parent directory" },
+	{ on = "<Right>", run = "enter", desc = "Enter the child directory" },
+
+	# Selection
+	{ on = "<Space>", run = [ "toggle" ], desc = "Toggle the current selection state" },
+	{ on = "A", run = "select all",   desc = "Select all files" },
+	{ on = "U", run = "unselect all", desc = "Unselect all files" },
+
+	# Spotting
+	{ on = "<Tab>", run = "spot", desc = "Spot hovered file" },
+
+	# Operation
+	{ on = "<Enter>",   run = "open",                        desc = "Open selected files" },
+	{ on = "<S-Enter>", run = "open --interactive",          desc = "Open selected files interactively" },
+
+	{ on = "y",         run = "yank",                        desc = "Yank selected files (copy)" },
+	{ on = "x",         run = "yank --cut",                  desc = "Yank selected files (cut)" },
+	{ on = "p",         run = "paste",                       desc = "Paste yanked files" },
+	{ on = "P",         run = "paste --force",               desc = "Paste yanked files (overwrite if the destination exists)" },
+	{ on = "Y",         run = "unyank",                      desc = "Cancel the yank status" },
+	{ on = "X",         run = "unyank",                      desc = "Cancel the yank status" },
+
+	{ on = "<Delete>",  run = "remove",                      desc = "Trash selected files" },
+	{ on = "<S-Delete>",run = "remove --permanently",        desc = "Permanently delete selected files" },
+
+	{ on = "a",         run = "create",                      desc = "Create a file (ends with / for directories)" },
+	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
+	{ on = ".",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
+
+	# Find
+	{ on = "f", run = "filter --smart", desc = "Filter files" },
+	{ on = "/", run = "find --smart",            desc = "Find next file" },
+	{ on = "s", run = "search --via=fd", desc = "Search by filename" },
+	{ on = "S", run = "search --via=rg", desc = "Search by contents" },
+
+	# Copy
+	{ on = [ "c", "c" ], run = "copy path",             desc = "Copy the file path" },
+	{ on = [ "c", "d" ], run = "copy dirname",          desc = "Copy the directory path" },
+	{ on = [ "c", "f" ], run = "copy filename",         desc = "Copy the filename" },
+	{ on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy the filename without extension" },
+
+	# Goto
+	{ on = [ "g", "h" ],       run = "cd ~",                     desc = "Home" },
+	{ on = [ "g", "c" ],       run = "cd ~/.config",             desc = "~/.config" },
+	{ on = [ "g", "d" ],       run = "cd ~/Downloads",           desc = "~/Downloads" },
+
+	# Tabs
+	{ on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },
+
+	{ on = "1", run = "tab_switch 0", desc = "Switch to first tab" },
+	{ on = "2", run = "tab_switch 1", desc = "Switch to second tab" },
+	{ on = "3", run = "tab_switch 2", desc = "Switch to third tab" },
+	{ on = "4", run = "tab_switch 3", desc = "Switch to fourth tab" },
+	{ on = "5", run = "tab_switch 4", desc = "Switch to fifth tab" },
+	{ on = "6", run = "tab_switch 5", desc = "Switch to sixth tab" },
+	{ on = "7", run = "tab_switch 6", desc = "Switch to seventh tab" },
+	{ on = "8", run = "tab_switch 7", desc = "Switch to eighth tab" },
+	{ on = "9", run = "tab_switch 8", desc = "Switch to ninth tab" },
+
+	# Dragon-drop
+	{ on = "D", run = "shell 'dragon-drop -x %*' --orphan", desc = "Drag selected files" },
+
+	# Drives
+	{ on = "M", run = "shell 'udisksctl mount -b /dev/sdb1' --block", desc = "Mount HDD" },
+	{ on = "u", run = "shell 'udisksctl unmount -b /dev/sdb1' --block", desc = "Unmount HDD" },
+	{ on = [ "g", "m" ], run = "cd /run/media/vayeti", desc = "Go to media" },
+
+	# Help
+	{ on = "<F1>", run = "help", desc = "Open help" },
+]
+
+[spot]
+keymap = [
+	{ on = "<Esc>", run = "close", desc = "Close the spot" },
+	{ on = "<Up>",    run = "swipe prev", desc = "Previous line" },
+	{ on = "<Down>",  run = "swipe next", desc = "Next line" },
+]
+
+[pick]
+keymap = [
+	{ on = "<Esc>",   run = "close",          desc = "Cancel pick" },
+	{ on = "<Enter>", run = "close --submit", desc = "Submit the pick" },
+
+	{ on = "<Up>",   run = "arrow prev", desc = "Previous option" },
+	{ on = "<Down>", run = "arrow next", desc = "Next option" },
+]
+
+[input]
+keymap = [
+  # Confirm / Cancel
+  { on = "<Enter>", run = "close --submit", desc = "Submit input" },
+  { on = "<Esc>",   run = "close",          desc = "Cancel input" },
+  { on = "<C-c>",   run = "close",          desc = "Cancel input" },
+
+  # Navigation
+  { on = "<Left>",  run = "move -1" },
+  { on = "<Right>", run = "move 1" },
+  { on = "<C-Left>",  run = "move bol" },
+  { on = "<C-Right>",   run = "move eol" },
+
+  # Delete
+  { on = "<Backspace>", run = "backspace" },
+  { on = "<C-Backspace>", run = "kill backward" },
+  { on = "<C-Delete>",    run = "kill forward" },
+]
+
+[confirm]
+
+keymap = [
+    { on = "<Esc>", run = "close", desc = "Cancel the confirm" },
+    { on = "<Enter>", run = "close --submit", desc = "Submit the confirm" },
+
+    { on = "n", run = "close", desc = "Cancel the confirm" },
+    { on = "y", run = "close --submit", desc = "Submit the confirm" },
+]
+
+[cmp]
+keymap = [
+  { on = "<Tab>",   run = "next",     desc = "Next completion" },
+  { on = "<S-Tab>", run = "prev",     desc = "Previous completion" },
+  { on = "<Enter>", run = "confirm",  desc = "Accept completion" },
+  { on = "<Esc>",   run = "close",    desc = "Close completion" },
+]

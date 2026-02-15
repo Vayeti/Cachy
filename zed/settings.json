@@ -1,0 +1,26 @@
+{
+  "hide_mouse": "never",
+  "cursor_shape": "bar",
+  "text_rendering_mode": "platform_default",
+  "agent_ui_font_size": 16.0,
+  "ui_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "toolbar": { "breadcrumbs": false, "quick_actions": false },
+  "project_panel": { "entry_spacing": "standard" },
+  "tabs": { "file_icons": true },
+  "format_on_save": "on",
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "base_keymap": "JetBrains",
+  "ui_font_size": 16.0,
+  "buffer_font_size": 15,
+  "buffer_font_features": { "calt": false },
+  "buffer_font_weight": 300,
+  "theme": {
+    "mode": "dark",
+    "light": "Noctalia Light Transparent",
+    "dark": "Noctalia Dark Transparent",
+  },
+}

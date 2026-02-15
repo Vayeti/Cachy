@@ -1,0 +1,75 @@
+[mgr]
+ratio          = [ 2, 4, 3 ]
+sort_by        = "alphabetical"
+sort_dir_first = true
+linemode       = "size"
+show_hidden    = true
+scrolloff      = 5
+mouse_events   = [ "click", "scroll" ]
+
+# ===== OPENERS =====
+
+[opener]
+
+# MAIN EDITOR
+edit = [
+  { run = 'zeditor "$@"', desc = "Zed Editor", block = false },
+]
+
+# Fallback system open
+open = [
+  { run = "xdg-open %s1", desc = "Open" },
+]
+
+# Media
+play = [
+  { run = "xdg-open %s1", desc = "Play" },
+]
+
+# Archives
+extract = [
+  { run = "ya pub extract --list %s", desc = "Extract here" },
+]
+
+# ===== RULES =====
+
+[open]
+rules = [
+  # Folders
+  { url = "*/", use = [ "edit", "open" ] },
+
+  # Text
+  { mime = "text/*", use = "edit" },
+  { name = "*.md",  use = "edit" },
+  { name = "*.txt", use = "edit" },
+  { name = "*.toml", use = "edit" },
+  { name = "*.json", use = "edit" },
+  { name = "*.rs", use = "edit" },
+  { name = "*.lua", use = "edit" },
+  { name = "*.sh", use = "edit" },
+
+  # Images
+  { mime = "image/*", use = "open" },
+
+  # Audio / Video
+  { mime = "{audio,video}/*", use = "play" },
+
+  # Archives
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz}", use = "extract" },
+
+  # EVERYTHING ELSE
+  { url = "*", use = "open" },
+]
+
+# ===== PREVIEW =====
+
+[preview]
+wrap = "no"
+tab_size = 2
+max_width = 600
+max_height = 900
+
+# ===== UI =====
+
+[input]
+cursor_blink = false
